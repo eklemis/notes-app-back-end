@@ -3,8 +3,13 @@ const got = require("got");
 
 const init = async () => {
 	const server = Hapi.server({
-		port: 3003,
-		host: "localhost",
+		port: 5000,
+		host: process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0",
+		routes: {
+			cors: {
+				origin: ["*"],
+			},
+		},
 	});
 	server.route([
 		{
